@@ -3,7 +3,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagra
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-2xl my-10 px-8 pt-14 pb-8 relative overflow-hidden">
+    <footer className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-3xl mx-6 my-10 px-8 pt-14 pb-8 relative overflow-hidden">
 
       {/* Top Logo */}
       <div className="flex justify-center mb-10">
