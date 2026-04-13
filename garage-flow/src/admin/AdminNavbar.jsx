@@ -1,24 +1,18 @@
-// components/Navbar.jsx
+// components/AdminPanelNavbar.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const AdminPanelNavbar = () => {
   const [open, setOpen] = useState(false);
-  const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const navigate = useNavigate();
   
   
-  const handleAdminPanelRoute = ()=> {
-    navigate("/adminPanel");
-    setIsAdminPanelOpen(true)
-  }
-
-  const handleSignInRoute = ()=> {
-    navigate("/");
+  const handleHomePageRoute = ()=> {
+    navigate("/home")
   }
 
   return (
-    <nav className={`sticky top-0 z-50 bg-white shadow-sm ${isAdminPanelOpen ? 'hidden' : 'visible'}`}>
+    <nav className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         
         <div className="flex items-center justify-between h-16">
@@ -32,26 +26,21 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
                 <a href="#" className="text-gray-600 hover:text-blue-600">
-                    Home
+                    Dashboard
+                </a>
+                <a href="#" className="text-gray-600 hover:text-blue-600">
+                    Bookings
                 </a>
                 <a href="#" className="text-gray-600 hover:text-blue-600">
                     Services
                 </a>
                 <a href="#" className="text-gray-600 hover:text-blue-600">
-                    About Us
-                </a>
-                <a href="#" className="text-gray-600 hover:text-blue-600">
-                    Contact
+                    Garage Setting
                 </a>
 
             <button className="bg-blue-600 text-white px-4 py-1.5 rounded-md hover:bg-blue-700 transition"
-                    onClick={handleAdminPanelRoute}>
-              Admin Panel
-            </button>
-
-            <button className="bg-blue-600 text-white px-4 py-1.5 rounded-md hover:bg-blue-700 transition"
-                  onClick={handleSignInRoute}>
-              Signin
+                    onClick={handleHomePageRoute}>
+              Home
             </button>
           </div>
 
@@ -109,4 +98,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminPanelNavbar;

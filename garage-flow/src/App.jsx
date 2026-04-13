@@ -6,19 +6,19 @@ import Footer from "./Sections/Footer";
 import SignInCard from './auth/signin/SignIn';
 import SignUpCard from "./auth/signup/SignUp";
 import HomePage from "./Pages/HomePage";
+import AdminPanelLayout from "./admin/AdminPanelLayout";
 
 import './App.css'
 
 function App() {
   return (
     <>
-      <Navbar />
       <Routes>
         <Route path="/" element={<SignInCard />} />
         <Route path="/signup" element={<SignUpCard />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/adminPanel" element={<AdminPanelLayout />} />
       </Routes>
-      <Footer />
     </>
   )
 }
