@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AdminPanelNavbar = () => {
+const AdminPanelNavbar = ({ setActivePage }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   
@@ -23,20 +23,19 @@ const AdminPanelNavbar = () => {
             <span className="font-semibold text-lg">Logo</span>
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-                <a href="#" className="text-gray-600 hover:text-blue-600">
+                <button onClick={() => setActivePage("dashboard")} className="text-gray-600 hover:text-blue-600">
                     Dashboard
-                </a>
-                <a href="#" className="text-gray-600 hover:text-blue-600">
+                </button>
+                <button onClick={() => setActivePage("bookings")} className="text-gray-600 hover:text-blue-600">
                     Bookings
-                </a>
-                <a href="#" className="text-gray-600 hover:text-blue-600">
+                </button>
+                <button onClick={() => setActivePage("services")} className="text-gray-600 hover:text-blue-600">
                     Services
-                </a>
-                <a href="#" className="text-gray-600 hover:text-blue-600">
+                </button>
+                <button onClick={() => setActivePage("settings")} className="text-gray-600 hover:text-blue-600">
                     Garage Setting
-                </a>
+                </button>
 
             <button className="bg-blue-600 text-white px-4 py-1.5 rounded-md hover:bg-blue-700 transition"
                     onClick={handleHomePageRoute}>
@@ -78,18 +77,22 @@ const AdminPanelNavbar = () => {
       {open && (
         <div className="md:hidden bg-white px-4 pb-4 shadow-md">
           <div className="flex flex-col gap-4">
-            <a href="#" className="text-gray-600 hover:text-blue-600">
+            <button onClick={() => setActivePage("dashboard")} className="text-left text-gray-600 hover:text-blue-600">
+              Dashboard
+            </button>
+            <button onClick={() => setActivePage("bookings")} className="text-left text-gray-600 hover:text-blue-600">
+              Bookings
+            </button>
+            <button onClick={() => setActivePage("services")} className="text-left text-gray-600 hover:text-blue-600">
               Services
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">
-              About Us
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">
-              Contact
-            </a>
+            </button>
+            <button onClick={() => setActivePage("settings")} className="text-left text-gray-600 hover:text-blue-600">
+              Garage Setting
+            </button>
 
-            <button className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
-              Login
+            <button className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                    onClick={handleHomePageRoute}>
+              Home
             </button>
           </div>
         </div>

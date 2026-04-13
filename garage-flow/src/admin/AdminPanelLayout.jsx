@@ -33,7 +33,7 @@ export default function AdminPanelLayout() {
     <div className="h-screen flex flex-col">
 
       {/* ✅ Navbar (fixed top) */}
-      <AdminPanelNavbar />
+      <AdminPanelNavbar setActivePage={setActivePage} />
 
       {/* ✅ Main Layout */}
       <div className="flex flex-1 overflow-hidden">
