@@ -1,67 +1,26 @@
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
-
 import EditServiceDetails from "../Modal/EditServiceDetail";
 import ConfirmPopup from "../Modal/ConfirmPopup";
 
 export default function ServicesDetails() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal]         = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem]   = useState(null);
+  const [search, setSearch]               = useState("");
 
-  const bookings = [
-    {
-      service: "Oil Change",
-      Price: "999",
-      Duration: "1 Hour",
-      statusColor: "bg-yellow-200 text-yellow-800",
-      actionColor: "bg-blue-600",
-    },
-    {
-      service: "Rahul",
-      Price: "1299",
-      Duration: "1 Hour",
-      statusColor: "text-gray-700",
-      actionColor: "bg-green-600",
-    },
-    {
-      service: "Simran",
-      Price: "799",
-      Duration: "1 Hour",
-      statusColor: "text-gray-700",
-      actionColor: "bg-green-600",
-    },
-    {
-      service: "Vikram",
-      Price: "899",
-      Duration: "1 Hour",
-      statusColor: "text-gray-700",
-      actionColor: "bg-green-600",
-    },
-    {
-      service: "Anjali",
-      Price: "3666",
-      Duration: "1 Hour",
-      statusColor: "text-gray-700",
-      actionColor: "bg-yellow-400",
-    },
-    {
-      service: "Rajesh",
-      Price: "899",
-      Duration: "1 Hour",
-      statusColor: "text-gray-700",
-      actionColor: "bg-green-600",
-    },
+  const services = [
+    { service: "Oil Change",      Price: "999",  Duration: "1 Hour"   },
+    { service: "General Service", Price: "1899", Duration: "3 Hours"  },
+    { service: "Car Wash",        Price: "499",  Duration: "1.5 Hours"},
+    { service: "Repair",          Price: "1299", Duration: "2 Hours"  },
+    { service: "Wheel Balance",   Price: "799",  Duration: "1 Hour"   },
+    { service: "AC Service",      Price: "3666", Duration: "2 Hours"  },
   ];
 
-  const handleEditButtonClick = () => {
-    setShowModal(true);
-  }
-
-  const handleDeleteClick = (item) => {
-    setSelectedItem(item);
-    setShowDeletePopup(true);
-  };
+  const filtered = services.filter((s) =>
+    s.service.toLowerCase().includes(search.toLowerCase())
+  );
 
   const handleConfirmDelete = () => {
     console.log("Deleting:", selectedItem);
@@ -69,111 +28,90 @@ export default function ServicesDetails() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
+    <div className="p-6">
 
-      {/* Title */}
-        <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-blue-900 mb-4">
-                Manage Services
-            </h2>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow my-2"
-              onClick={handleEditButtonClick}>
-                Add Service
-            </button>
-        </div>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-xl font-bold text-gray-800">Manage Services</h2>
+        <button
+          onClick={() => setShowModal(true)}
+          className="bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition-all text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-sm"
+        >
+          + Add Service
+        </button>
+      </div>
 
       {/* Search */}
-      <div className="relative mb-4 max-w-md">
-        <FaSearch className="absolute top-3 left-3 text-gray-400" />
+      <div className="relative mb-4 max-w-sm">
+        <FaSearch className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-400 text-xs" />
         <input
           type="text"
-          placeholder="Search service or customer"
-          className="w-full pl-10 pr-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search service…"
+          className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
         />
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
-        {/* Header */}
-        <div className="grid grid-cols-4 bg-gray-100 px-6 py-3 font-semibold text-gray-700">
+        {/* Header Row */}
+        <div className="grid grid-cols-4 bg-gray-50 px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide border-b border-gray-100">
           <p>Service</p>
-          <p>Price</p>
+          <p>Price (₹)</p>
           <p>Duration</p>
           <p>Actions</p>
         </div>
 
-        {/* Rows */}
-        {bookings.map((item, index) => (
+        {/* Data Rows */}
+        {filtered.map((item, i) => (
           <div
-            key={index}
-            className="grid grid-cols-4 px-6 py-4 items-center border-t hover:bg-gray-50 transition"
+            key={i}
+            className="grid grid-cols-4 px-6 py-3.5 items-center border-b border-gray-50 hover:bg-gray-50 transition-colors last:border-0"
           >
-            <p>{item.service}</p>
-            <p>{item.Price}</p>
+            <p className="text-sm font-medium text-gray-800">{item.service}</p>
+            <p className="text-sm text-gray-600 font-semibold">₹{item.Price}</p>
+            <p className="text-sm text-gray-500">{item.Duration}</p>
 
-            {/* Service Badge */}
-            <p>
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${item.statusColor}`}
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowModal(true)}
+                className="bg-blue-600 hover:bg-blue-700 active:scale-[0.97] transition-all text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm cursor-pointer"
               >
-                {item.Duration}
-              </span>
-            </p>
-
-            {/* Action Button */}
-            <div className="">
-                <button
-                className={`${item.actionColor} text-white px-4 py-1.5 rounded-lg shadow hover:opacity-90 mx-1 cursor-pointer`}
-                onClick = { handleEditButtonClick}
-                >
-                EDIT
-                </button>
-
-                <button
-                className={`${item.actionColor} text-white px-4 py-1.5 rounded-lg shadow hover:opacity-90 cursor-pointer`}
-                  onClick={() => handleDeleteClick(item)}
-                >
-                DELETE
-                </button>
-
+                Edit
+              </button>
+              <button
+                onClick={() => { setSelectedItem(item); setShowDeletePopup(true); }}
+                className="bg-red-500 hover:bg-red-600 active:scale-[0.97] transition-all text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm cursor-pointer"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
 
+        {filtered.length === 0 && (
+          <p className="text-center text-sm text-gray-400 py-8">No services found.</p>
+        )}
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-center gap-3 mt-6">
-        <span className="text-gray-600">Page</span>
-
-        <button className="px-3 py-1 border rounded hover:bg-gray-200">
-          {"<"}
-        </button>
-
-        <button className="px-3 py-1 border rounded bg-blue-600 text-white">
-          1
-        </button>
-
-        <button className="px-3 py-1 border rounded hover:bg-gray-200">
-          {">"}
-        </button>
+      <div className="flex items-center justify-center gap-2 mt-5">
+        <button className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">‹</button>
+        <button className="px-3 py-1.5 text-sm border border-blue-600 bg-blue-600 text-white rounded-lg">1</button>
+        <button className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">›</button>
       </div>
 
-        {showModal && (
-          <EditServiceDetails onClose={() => setShowModal(false)} />
-        )}
-
-        {showDeletePopup && (
-          <ConfirmPopup
-            message={`Delete ${selectedItem?.service}?`}
-            confirmText="Delete"
-            onConfirm={handleConfirmDelete}
-            onClose={() => setShowDeletePopup(false)}
-          />
-        )}
-
-
+      {showModal && <EditServiceDetails onClose={() => setShowModal(false)} />}
+      {showDeletePopup && (
+        <ConfirmPopup
+          message={`Delete "${selectedItem?.service}"?`}
+          confirmText="Delete"
+          onConfirm={handleConfirmDelete}
+          onClose={() => setShowDeletePopup(false)}
+        />
+      )}
     </div>
   );
 }

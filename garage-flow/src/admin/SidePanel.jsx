@@ -1,42 +1,29 @@
 export default function AdminSidePanel({ setActivePage }) {
+
+  const navItems = [
+    { label: "Dashboard",       key: "dashboard", icon: "📊" },
+    { label: "Bookings",        key: "bookings",  icon: "📋" },
+    { label: "Services",        key: "services",  icon: "🔧" },
+    { label: "Garage Settings", key: "settings",  icon: "⚙️" },
+  ];
+
   return (
-    <div className="bg-blue-600 h-full">
-      <div className="flex flex-col gap-2 text-white">
-
+    <div className="flex flex-col gap-1">
+      {navItems.map((item) => (
         <button
-          onClick={() => setActivePage("dashboard")}
-          className="text-left hover:bg-blue-700 p-2 rounded"
+          key={item.key}
+          onClick={() => setActivePage(item.key)}
+          className="flex items-center gap-3 text-left text-sm font-medium text-blue-100 hover:bg-blue-700 hover:text-white px-3 py-2.5 rounded-xl transition-colors duration-150"
         >
-          Dashboard
+          <span className="text-base">{item.icon}</span>
+          {item.label}
         </button>
+      ))}
 
-        <button
-          onClick={() => setActivePage("bookings")}
-          className="text-left hover:bg-blue-700 p-2 rounded"
-        >
-          Bookings
+      <div className="mt-auto pt-6 border-t border-blue-500 mt-6">
+        <button className="flex items-center gap-3 text-left text-sm font-medium text-blue-200 hover:bg-blue-700 hover:text-white px-3 py-2.5 rounded-xl transition-colors w-full">
+          <span>🚪</span> Sign Out
         </button>
-
-        <button
-          onClick={() => setActivePage("services")}
-          className="text-left hover:bg-blue-700 p-2 rounded"
-        >
-          Services
-        </button>
-
-        <button
-          onClick={() => setActivePage("settings")}
-          className="text-left hover:bg-blue-700 p-2 rounded"
-        >
-          Garage Settings
-        </button>
-
-        <button
-          className="text-left hover:bg-blue-700 p-2 rounded"
-        >
-          Signout
-        </button>
-
       </div>
     </div>
   );

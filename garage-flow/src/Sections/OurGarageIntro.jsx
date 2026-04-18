@@ -2,43 +2,59 @@ import React from "react";
 
 const OurGarageIntroBanner = () => {
   return (
-    <section className="bg-gradient-to-r from-blue-100 to-blue-200 px-6 md:px-16 py-12 rounded-2xl flex flex-col md:flex-row items-center justify-between">
+    <section className="bg-white rounded-2xl shadow-md px-6 md:px-10 py-8 my-2">
 
-      {/* LEFT CONTENT */}
-      <div className="max-w-lg text-blue-900">
-        <h2 className="text-2xl md:text-3xl font-bold border-b border-blue-300 pb-2 mb-4">
-          Our Garage
-        </h2>
+      <h2 className="text-lg font-bold text-gray-800 mb-5">Our Garage</h2>
 
-        <p className="mb-2 text-gray-700">
-          1234 Main Street, Anytown, TN
-        </p>
+      <div className="flex flex-col md:flex-row gap-6 items-start">
 
-        <p className="mb-6 text-gray-700">
-          Call Us : <span className="font-semibold">9545589666</span>
-        </p>
+        {/* Left – Info */}
+        <div className="flex-1 flex flex-col gap-3">
 
-        {/* Buttons */}
-        <div className="flex gap-4">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
-            Call Us
-          </button>
+          {/* Address */}
+          <div className="flex items-start gap-3">
+            <span className="text-blue-600 mt-0.5 text-base">📍</span>
+            <div>
+              <p className="text-sm font-medium text-gray-700">1234 Main Street, Anytown, IN</p>
+            </div>
+          </div>
 
-          <button className="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg shadow">
-            Get Direction
-          </button>
+          {/* Phone */}
+          <div className="flex items-center gap-3">
+            <span className="text-blue-600 text-base">📞</span>
+            <p className="text-sm font-medium text-gray-700">Call Us : <span className="font-semibold">9876643710</span></p>
+          </div>
+
+          {/* Hours */}
+          <div className="flex items-center gap-3">
+            <span className="text-blue-600 text-base">🕐</span>
+            <p className="text-sm font-medium text-gray-700">Open : Mon-Sat: 9 AM – 7 PM</p>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-col gap-2 mt-3 max-w-[180px]">
+            <button className="flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 active:scale-[0.98] transition-all text-white font-semibold py-2.5 px-4 rounded-lg text-sm shadow">
+              📞 Call Now
+            </button>
+            <button className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 active:scale-[0.98] transition-all text-white font-semibold py-2.5 px-4 rounded-lg text-sm shadow">
+              💬 WhatsApp Us
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* RIGHT IMAGE */}
-      <div className="mt-8 md:mt-0">
-        <img
-          src="/garage-banner.png" // replace with your image
-          alt="garage"
-          className="w-[300px] md:w-[400px] object-contain"
-        />
-      </div>
+        {/* Right – Map placeholder */}
+        <div className="flex-1 min-h-[160px] rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-gray-100 flex items-center justify-center">
+          <iframe
+            title="Garage Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019!2d-122.4194!3d37.7749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ2JzI5LjYiTiAxMjLCsDI1JzA5LjgiVw!5e0!3m2!1sen!2sin!4v1234567890"
+            className="w-full h-40 border-0"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
 
+      </div>
     </section>
   );
 };

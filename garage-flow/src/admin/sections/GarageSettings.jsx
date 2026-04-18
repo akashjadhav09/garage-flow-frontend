@@ -1,59 +1,47 @@
+import { useState } from "react";
+
 export default function GarageSettingSection() {
-    return(
-        <>
-            <div className="bg-gray-100 min-h-screen p-6">
-                {/* Title */}
-                <h2 className="text-2xl font-bold text-blue-900 mb-4">
-                    Garage Settings
-                </h2>
+  const [garageName, setGarageName]   = useState("");
+  const [address, setAddress]         = useState("");
+  const [workingHours, setWorkingHours] = useState("");
+  const [phone, setPhone]             = useState("");
 
-                <div>
-                    <p className="mb-2 font-medium">
-                        Garage Name
-                    </p>
+  const fields = [
+    { label: "Garage Name",    value: garageName,    setter: setGarageName,   placeholder: "e.g. Akash Auto Garage"       },
+    { label: "Address",        value: address,        setter: setAddress,      placeholder: "e.g. 1234 Main St, Anytown"   },
+    { label: "Phone Number",   value: phone,          setter: setPhone,        placeholder: "e.g. +91 98765 43210"         },
+    { label: "Working Hours",  value: workingHours,   setter: setWorkingHours, placeholder: "e.g. Mon–Sat: 9 AM – 7 PM"   },
+  ];
 
-                    <div className="w-full sm:w-64">
-                        <input
-                            type="text"
-                            placeholder="Enter Garage Name"
-                            className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-                </div>
+  return (
+    <div className="p-6">
 
-                <div>
-                    <p className="mb-2 font-medium">
-                        Address 
-                    </p>
+      <h2 className="text-xl font-bold text-gray-800 mb-6">Garage Settings</h2>
 
-                    <div className="w-full sm:w-64">
-                        <input
-                            type="text"
-                            placeholder="Enter Address"
-                            className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-                </div>
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-6 max-w-lg">
 
-                <div>
-                    <p className="mb-2 font-medium">
-                        Working Hours 
-                    </p>
-
-                    <div className="w-full sm:w-64">
-                        <input
-                            type="text"
-                            placeholder="Enter Working Hours"
-                            className="w-full px-4 py-2 border mb-2 border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-                </div>
-
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow my-2">
-                    Update Settings
-                </button>
-
+        <div className="flex flex-col gap-5">
+          {fields.map((f) => (
+            <div key={f.label}>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+                {f.label}
+              </label>
+              <input
+                type="text"
+                value={f.value}
+                onChange={(e) => f.setter(e.target.value)}
+                placeholder={f.placeholder}
+                className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors"
+              />
             </div>
-        </>
-    )
+          ))}
+        </div>
+
+        <button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition-all text-white font-semibold py-2.5 rounded-xl shadow text-sm">
+          Update Settings
+        </button>
+
+      </div>
+    </div>
+  );
 }

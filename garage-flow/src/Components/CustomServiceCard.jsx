@@ -2,26 +2,22 @@ import React from "react";
 
 const CustomServiceCard = ({ image, title, price }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 w-44 hover:shadow-lg transition duration-300 border">
+    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-gray-100 flex flex-col items-center text-center cursor-pointer group">
 
       {/* Image */}
-      <div className="flex justify-center mb-3">
+      <div className="w-full h-24 overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="w-24 h-16 object-contain"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
 
-      {/* Title */}
-      <h3 className="text-center text-blue-900 font-semibold">
-        {title}
-      </h3>
-
-      {/* Price */}
-      <p className="text-center text-gray-700 font-medium mt-1">
-        {price}
-      </p>
+      {/* Details */}
+      <div className="py-3 px-3">
+        <h3 className="text-xs font-semibold text-blue-900">{title}</h3>
+        <p className="text-sm font-bold text-gray-800 mt-0.5">{price}</p>
+      </div>
     </div>
   );
 };

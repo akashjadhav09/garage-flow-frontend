@@ -1,57 +1,53 @@
 export default function Dashboard() {
   const stats = [
-    {
-      label: "Total Bookings",
-      count: 55,
-      bg: "from-sky-400 to-sky-600",
-    },
-    {
-      label: "Pending Bookings",
-      count: 20,
-      bg: "from-orange-400 to-orange-600",
-    },
-    {
-      label: "Completed",
-      count: 35,
-      bg: "from-green-400 to-green-600",
-    },
+    { label: "Total Bookings",   count: 55, icon: "📋", color: "text-sky-600",    bg: "bg-sky-50",    border: "border-sky-200"    },
+    { label: "Pending Bookings", count: 20, icon: "⏳", color: "text-orange-500", bg: "bg-orange-50", border: "border-orange-200" },
+    { label: "Completed",        count: 35, icon: "✅", color: "text-green-600",  bg: "bg-green-50",  border: "border-green-200"  },
   ];
 
   return (
-    <div className="flex justify-center px-6 py-8">
-      <div className="flex gap-4 flex-wrap justify-center">
+    <div className="p-6">
 
-        {stats.map((item, index) => (
+      <h2 className="text-xl font-bold text-gray-800 mb-6">Dashboard</h2>
+
+      {/* Stat Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        {stats.map((item, i) => (
           <div
-            key={index}
-            className={`relative w-44 rounded-2xl p-4 text-white shadow-lg 
-              bg-gradient-to-br ${item.bg}
-              flex flex-col items-center justify-center text-center
-              transform transition-all duration-500 ease-out
-              hover:scale-105 hover:shadow-xl
-              animate-fadeSlide
-            `}
-            style={{ animationDelay: `${index * 0.2}s` }}
+            key={i}
+            className={`bg-white rounded-2xl border ${item.border} shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow duration-200`}
           >
-            {/* Graph Line Effect */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
-              <svg viewBox="0 0 100 50" className="w-full h-full">
-                <polyline
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="2"
-                  points="0,40 20,30 40,35 60,20 80,25 100,10"
-                />
-              </svg>
+            <div className={`${item.bg} rounded-xl w-12 h-12 flex items-center justify-center text-2xl flex-shrink-0`}>
+              {item.icon}
             </div>
-
-            {/* Content */}
-            <p className="text-sm opacity-90">{item.label}</p>
-            <p className="text-2xl font-bold mt-1">{item.count}</p>
+            <div>
+              <p className="text-xs text-gray-400 font-medium">{item.label}</p>
+              <p className={`text-3xl font-extrabold ${item.color}`}>{item.count}</p>
+            </div>
           </div>
         ))}
-
       </div>
+
+      {/* Recent activity placeholder */}
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <h3 className="text-sm font-semibold text-gray-700 mb-4">Recent Bookings</h3>
+        <div className="flex flex-col gap-3">
+          {[
+            { name: "Akash",  vehicle: "Honda City",    service: "Oil Change",  status: "Pending",   color: "bg-yellow-400" },
+            { name: "Rahul",  vehicle: "Maruti Swift",  service: "Car Wash",    status: "Completed", color: "bg-green-500"  },
+            { name: "Simran", vehicle: "Yamaha FZSS",   service: "Repair",      status: "Pending",   color: "bg-yellow-400" },
+          ].map((b, i) => (
+            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+              <div>
+                <p className="text-sm font-semibold text-gray-800">{b.name}</p>
+                <p className="text-xs text-gray-400">{b.vehicle} · {b.service}</p>
+              </div>
+              <span className={`${b.color} text-white text-xs font-semibold px-3 py-1 rounded-lg`}>{b.status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </div>
   );
 }
