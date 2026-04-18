@@ -1,55 +1,84 @@
-import HomeIntroBanner from "../Sections/HomeIntroBanner";
-import ServicesSection from "../Sections/ServicesSection";
-import BrandNameStrip from "../Components/BrandNamesStrip";
-import OurGarageIntroBanner from "../Sections/OurGarageIntro";
-import BookServiceSection from "../Sections/BookServiceSection";
-import AddYourVehicleSection from "../Sections/AddYourVehicle";
-import MyBookingsSection from "../Sections/MyBookingsSection";
+import HomeIntroBanner        from "../Sections/HomeIntroBanner";
+import ServicesSection        from "../Sections/ServicesSection";
+import BrandNameStrip         from "../Components/BrandNamesStrip";
+import OurGarageIntroBanner   from "../Sections/OurGarageIntro";
+import BookServiceSection      from "../Sections/BookServiceSection";
+import AddYourVehicleSection  from "../Sections/AddYourVehicle";
+import MyBookingsSection      from "../Sections/MyBookingsSection";
 import SelectYourServiceSection from "../Sections/SelectServicesSection";
-import Navbar from "../Sections/Navbar";
-import Footer from "../Sections/Footer";
-import ContactUsPage from "./ContactUsPage";
+import Navbar                 from "../Sections/Navbar";
+import Footer                 from "../Sections/Footer";
+import ContactUsPage          from "./ContactUsPage";
 
-const HomePage = () => {
-  return (
-    <div className="min-h-screen" style={{ backgroundColor: "#EBF0FA" }}>
-      <Navbar />
+/* ─────────────────────────────────────────────
+   Thin wrapper that gives every section its
+   scroll-target ID and consistent spacing.
+───────────────────────────────────────────── */
+const Section = ({ id, children, className = "" }) => (
+  <section
+    id={id}
+    className={`scroll-mt-16 ${className}`}   /* scroll-mt offsets sticky navbar height */
+  >
+    {children}
+  </section>
+);
 
-      {/* Page content wrapper */}
-      <div className="max-w-5xl mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
+const HomePage = () => (
+  <div className="min-h-screen" style={{ backgroundColor: "#E8EDF7" }}>
+    <Navbar />
 
-        {/* Hero Banner */}
+    {/* ── Centred, max-width content column ── */}
+    <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 grid gap-8">
+
+      {/* ① Hero */}
+      <Section id="home">
         <HomeIntroBanner />
+      </Section>
 
-        {/* Service Cards */}
+      {/* ② Services strip — 4-col grid inside the component */}
+      <Section id="services">
         <ServicesSection />
+      </Section>
 
-        {/* Brand Strip */}
+      {/* ③ Brand logos */}
+      <Section id="brands">
         <BrandNameStrip />
+      </Section>
 
-        {/* Two-column row: Add Vehicle + Select Service */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* ④ Add Vehicle  +  Service Selection  (2-col) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <Section id="add-vehicle">
           <AddYourVehicleSection />
+        </Section>
+        <Section id="select-service">
           <SelectYourServiceSection />
-        </div>
-
-        {/* Two-column row: Booking Form + My Bookings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <BookServiceSection />
-          <MyBookingsSection />
-        </div>
-
-        {/* Our Garage */}
-        <OurGarageIntroBanner />
-
-        {/* Contact */}
-        <ContactUsPage />
-
+        </Section>
       </div>
 
-      <Footer />
+      {/* ⑤ Book Service  +  My Bookings  (2-col) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <Section id="book-service">
+          <BookServiceSection />
+        </Section>
+        <Section id="bookings">
+          <MyBookingsSection />
+        </Section>
+      </div>
+
+      {/* ⑥ Our Garage */}
+      <Section id="garage">
+        <OurGarageIntroBanner />
+      </Section>
+
+      {/* ⑦ Contact */}
+      <Section id="contact">
+        <ContactUsPage />
+      </Section>
+
     </div>
-  );
-};
+
+    <Footer />
+  </div>
+);
 
 export default HomePage;
